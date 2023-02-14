@@ -1,13 +1,15 @@
-from requests import get
-from bs4 import BeautifulSoup
+from extractors.wwr import extract_wwr_jobs
+from extractors.indeed import Indeed
 
-base_url = "https://weworkremotely.com/remote-jobs/search?term=laravel"
-search_term = "laravel"
+try:
+    keyword = input("What do you want to search for?") or "python"
 
-response = get(f"{base_url}{search_term}")
+    wwr = extract_wwr_jobs(keyword)
+    indeed = Indeed().extract_indeed_jobs(keyword)
 
-if response.status_code != 200:
-    print("Can't request website")
-else:
-    soup = BeautifulSoup(response.text, 'html.parser')
-    print(soup.find_all("t:qitle"))
+    jobs = wwr + indeed
+
+    for job in jobs:
+        print(job)
+except Exception as error:
+    print(error)
