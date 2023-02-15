@@ -11,5 +11,6 @@ try:
 
     for job in jobs:
         print(job)
+    input("press enter to exit")
 except Exception as error:
     print(error)
