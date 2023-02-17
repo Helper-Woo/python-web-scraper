@@ -60,9 +60,9 @@ class Indeed:
                     location = job.find("div", class_="companyLocation")
                     job_data = {
                         "link": f"https://kr.indeed.com{link}",
-                        "company": name.string,
-                        "location": location.string,
-                        "position": title
+                        "company": name.string.replace(",", ""),
+                        "location": location.string.replace(",", ""),
+                        "position": title.replace(",", "")
                     }
                     results.append(job_data)
 

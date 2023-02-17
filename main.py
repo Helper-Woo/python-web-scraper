@@ -6,11 +6,14 @@ try:
 
     wwr = extract_wwr_jobs(keyword)
     indeed = Indeed().extract_indeed_jobs(keyword)
-
     jobs = wwr + indeed
 
+    file = open(f"{keyword}.csv", "w")
+    file.write("Position,Company,Location,URL\n")
+
     for job in jobs:
-        print(job)
-    input("press enter to exit")
+        file.write(f"{job['position'],job['company'],job['location'],job['link']}\n")
 except Exception as error:
     print(error)
+finally:
+    input("press enter to exit")
